@@ -23,7 +23,7 @@ The model uses several computational techniques:
 
 ## Dataset
 
-The project uses Baltimore-area roadway network data stored in `edges_all.csv`.
+The project uses Baltimore-area roadway network data stored in `MDOT_SHA_Annual_Average_Daily_Traffic_Baltimore.zip`.
 
 Because the dataset is too large to upload directly to GitHub, it is available through Google Drive.
 
