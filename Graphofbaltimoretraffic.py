@@ -18,7 +18,7 @@ df_plot = pd.merge(
 df_plot['road_label'] = df_plot['ref'].fillna(df_plot['name'])
 df_plot['road_label'] = df_plot['road_label'].fillna('Local Connector')
 
-# IMPORTANT: Group by unique road name so segments don't stack on top of each other
+# Group by unique road name so segments don't stack on top of each other
 df_grouped = df_plot.groupby('road_label', as_index=False)['vol_change'].max()
 
 # Top 10 Unique Diverted Corridors
