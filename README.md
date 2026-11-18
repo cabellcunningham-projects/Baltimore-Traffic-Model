@@ -48,9 +48,11 @@ pip install pandas numpy networkx matplotlib
 
 ### 2. Download the Dataset
 
-Download `edges_all.zip` using the link above.
+Download MDOT_SHA_Annual_Average_Daily_Traffic_Baltimore.zip using the Google Drive link above.
 
-Extract `edges_all.csv` and place it in the same folder as the Python scripts.
+Extract the ZIP file and locate edges_all.csv.
+
+Place edges_all.csv in the same folder as ModelForBaltimore1.py and Graphofbaltimoretraffic.py before running the simulation.
 
 ### 3. Run the Traffic Model
 
