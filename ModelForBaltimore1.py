@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 df_edges = pd.read_csv('edges_all.csv', low_memory=False)
 
 # 2. Clean and convert data from OpenStreetMap columns
-# Convert length (meters -> miles)
+# Convert length (meters to miles)
 df_edges['length_miles'] = df_edges['length'] * 0.000621371
 
 # Extract numeric speed limits from 'maxspeed' (e.g., '35 mph' -> 35.0), default to 35 mph if missing
@@ -21,7 +21,7 @@ df_edges['speed_limit_mph'] = (
 # Free-Flow Travel Time (FFTT) in minutes
 df_edges['fftt'] = (df_edges['length_miles'] / df_edges['speed_limit_mph']) * 60.0
 
-# Extract lane count and compute capacity (default: 1 lane = 1800 veh/hr)
+# Extract lane count and compute capacity
 df_edges['lanes_num'] = (
     df_edges['lanes'].astype(str)
     .str.extract(r'(\d+)')
@@ -35,7 +35,7 @@ df_edges['is_tunnel'] = df_edges['tunnel'].fillna('').astype(str).str.lower().ap
     lambda x: 1 if x in ['yes', 'building_passage', '1', 'true'] else 0
 )
 
-# Tag Key Bridge edges based on street name or ref (I-695 bridge over Patapsco)
+# Tag Key Bridge edges based on street name or ref
 name_match = df_edges['name'].fillna('').astype(str).str.contains('Francis Scott Key|Key Bridge', case=False)
 ref_bridge_match = (
     df_edges['bridge'].fillna('').astype(str).str.lower().isin(['yes', '1', 'true']) &
@@ -44,7 +44,7 @@ ref_bridge_match = (
 df_edges['is_key_bridge'] = (name_match | ref_bridge_match).astype(int)
 
 
-# 3. Congestion and Network Building Functions
+# 3. Congestion and Network Building 
 def bpr_cost(fftt, volume, capacity, alpha=0.15, beta=4.0):
     return fftt * (1.0 + alpha * (volume / capacity) ** beta)
 
@@ -65,7 +65,7 @@ def build_graph(df):
     return G
 
 def run_msa_traffic_assignment(G, od_matrix, iterations=5):
-    # Group OD demand by origin to calculate single-source shortest paths efficiently
+    # Group OD demand by origin to calculate shortest paths efficiently
     origin_demands = {}
     for (origin, destination), demand in od_matrix.items():
         origin_demands.setdefault(origin, []).append((destination, demand))
@@ -81,7 +81,7 @@ def run_msa_traffic_assignment(G, od_matrix, iterations=5):
             if not G.has_node(origin):
                 continue
             
-            # Compute shortest paths from 'origin' to all reachable nodes in ONE operation
+            # Compute shortest paths from origin to all reachable nodes in one operation
             paths = nx.single_source_dijkstra_path(G, origin, weight='current_cost')
 
             for destination, demand in dest_list:
@@ -103,7 +103,6 @@ def run_msa_traffic_assignment(G, od_matrix, iterations=5):
 
 
 # 4. Define Realistic Origin-Destination Demand
-# Get all node IDs directly from the edge dataset
 all_nodes = list(set(df_edges['u']).union(set(df_edges['v'])))
 
 # Select origins and destinations across the network
@@ -115,9 +114,9 @@ sample_destinations = all_nodes[-5:]
 for origin in sample_origins:
     for dest in sample_destinations:
         if origin != dest:
-            od_demand[(origin, dest)] = 500  # 500 trips per OD pair
+            od_demand[(origin, dest)] = 500 
 
-# 5. Execute Scenarios
+# 5. Execute
 print("Building baseline graph...")
 G_base = build_graph(df_edges)
 print("Running baseline traffic assignment...")
@@ -134,7 +133,7 @@ if key_bridge_edges:
 else:
     print("Notice: No explicit Key Bridge edges found by name/ref; running general disruption.")
 
-# Apply freight tunnel penalties permanently to free-flow travel time
+# Apply freight tunnel penalties permanently
 for u, v, d in G_disrupted.edges(data=True):
     if d['is_tunnel'] == 1:
         d['fftt'] *= 100.0
