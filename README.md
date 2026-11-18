@@ -79,16 +79,6 @@ This project is a simplified traffic-network simulation rather than a calibrated
 
 The results should therefore be interpreted as exploratory estimates of potential traffic redistribution, not measured traffic impacts.
 
-## Future Improvements
-
-Potential extensions include:
-
-- Incorporating observed traffic counts and origin-destination data.
-- Improving the identification of bridge and tunnel segments.
-- Calibrating roadway capacity and congestion parameters.
-- Creating geographic visualizations of traffic redistribution.
-- Comparing simulated outcomes against observed traffic conditions.
-
 ## Technologies Used
 
 Python | Pandas | NumPy | NetworkX | Matplotlib | OpenStreetMap
