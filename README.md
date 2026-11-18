@@ -52,8 +52,7 @@ Download MDOT_SHA_Annual_Average_Daily_Traffic_Baltimore.zip using the Google Dr
 
 Extract the ZIP file and locate edges_all.csv.
 
-Place edges_all.csv in the same folder as ModelForBaltimore1.py and Graphofbaltimoretraffic.py before running the simulation.
-
+Place edges_all.csv in the same folder as the Python scripts.
 ### 3. Run the Traffic Model
 
 ```bash
