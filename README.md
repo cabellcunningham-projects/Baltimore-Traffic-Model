@@ -82,3 +82,43 @@ The results should therefore be interpreted as exploratory estimates of potentia
 ## Technologies Used
 
 Python | Pandas | NumPy | NetworkX | Matplotlib | OpenStreetMap
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+## Simulation Results
+
+### Impact of the Francis Scott Key Bridge Closure
+
+The simulation compared baseline traffic conditions with a scenario in which 67 Key Bridge road-network edges were removed.
+
+<img width="1380" height="1338" alt="image" src="https://github.com/user-attachments/assets/e261391e-8131-4dd4-b7fb-762ed0963d42" />
+
+| Metric | Result |
+|---|---:|
+| Baseline vehicle-hours traveled | 5,277.26 hours |
+| Disrupted vehicle-hours traveled | 5,435.67 hours |
+| Additional vehicle-hours traveled | 158.40 hours |
+| Percentage increase | 3.0% |
+
+Under the modeled traffic demand assumptions, the bridge closure increased total network travel time by approximately **3.0%**.
+
+### Traffic Redistribution
+
+The following visualization identifies the ten corridors with the largest modeled increases in traffic following the bridge closure.
+
+<img width="2048" height="1100" alt="image" src="https://github.com/user-attachments/assets/fa2001f8-17a2-4269-aecc-2d0f6486d79f" />
+
+The largest modeled increases occurred on:
+
+- **MD 134:** +1,800 vehicles/hour
+- **Local Connector:** +1,600 vehicles/hour
+- **Pratt Avenue:** +1,500 vehicles/hour
+- **Greenspring Avenue:** +1,200 vehicles/hour
+- **MD 129:** +1,000 vehicles/hour
+- **I-83:** +1,000 vehicles/hour
+
+### Interpretation and Limitations
+
+The results demonstrate how removing a major transportation corridor can redistribute traffic and increase total travel time across a road network.
+
+These findings represent a computational simulation rather than measured traffic changes. The model uses assumed travel demand, and the roadway dataset requires further validation to exclude non-operational road segments.
+
